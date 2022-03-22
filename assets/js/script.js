@@ -9,22 +9,30 @@ document.addEventListener("DOMContentLoaded", function() {
             if (this.getAttribute('data-type') === 'submit') {
                 alert("You clicked submit!");
             } else {
-                let gametype = this.getAttribute('data-type');
-                alert(`You clicked ${gametype}`);
+                let gameType = this.getAttribute('data-type');
+                runGame(gameType);
             }
         })
     }
+
+    runGame('addition');
 })
 
-/**The mani game "loop", called when the scriot is first loaded
+/**The main game "loop", called when the scriot is first loaded
  * and after the user's answer has been proceesed
  */
-function runGame() {
+function runGame(gameType) {
 
     //create two random numbers
     let num1 = Math.floor(Math.random() * 25) + 1; 
     let num2 = Math.floor(Math.random() * 25) + 1;
 
+    if (gameType === 'addition') {
+        displayAdditionQuestion(num1, num2);
+    } else { 
+        alert(`Unknown game type: ${gameType}`);
+        throw `Unkown game type: ${gameType}. Aborting!`;
+    }
 }
 
 function checkAnswer() {
@@ -44,6 +52,10 @@ function incrementWrongAnswer() {
 }
 
 function displayAdditionQuestion() {
+
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operator').textContent = "+"
+    document.getElementById('operand2').textContent = operand2;
 
 }
 
